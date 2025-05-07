@@ -26,6 +26,16 @@ cmake -B build -DLLVM_BUILD_TYPE=Debug
 
 Delete the `build/` folder if you wish to switch between `Release` and `Debug`, then re-run the above command.
 
+## OMap File Format
+
+This is just a binary file that contains the following format:
+
+```
+(start rva, end rva, orig rva)
+```
+
+The number of entries is equal to the size of omap file divided by `0xC`.
+
 ## Credits
 
 - [PdbGen](https://github.com/gix/PdbGen)

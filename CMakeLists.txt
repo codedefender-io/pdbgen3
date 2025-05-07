@@ -24,13 +24,13 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 	set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS cmake.toml)
 endif()
 
-project(pdbgen2
+project(pdbgen3
 	VERSION
 		0.1.0
 )
 
-# Target: pdbgen2
-set(CMKR_TARGET pdbgen2)
+# Target: pdbgen3
+set(CMKR_TARGET pdbgen3)
 include(FetchContent)
 set(FETCHCONTENT_QUIET FALSE)
 option(LLVM_BUILD_TYPE "Build type for LLVM (Release or Debug)" Release)
@@ -129,27 +129,27 @@ else()
     message(STATUS "LLVM setup complete.")
 endif()
 
-set(pdbgen2_SOURCES
+set(pdbgen3_SOURCES
 	cmake.toml
 	"include/utils.h"
 	"src/main.cpp"
 	"src/utils.cpp"
 )
 
-add_executable(pdbgen2)
+add_executable(pdbgen3)
 
-target_sources(pdbgen2 PRIVATE ${pdbgen2_SOURCES})
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${pdbgen2_SOURCES})
+target_sources(pdbgen3 PRIVATE ${pdbgen3_SOURCES})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${pdbgen3_SOURCES})
 
-target_compile_features(pdbgen2 PRIVATE
+target_compile_features(pdbgen3 PRIVATE
 	cxx_std_17
 )
 
-target_include_directories(pdbgen2 PRIVATE
+target_include_directories(pdbgen3 PRIVATE
 	include
 )
 
-target_link_libraries(pdbgen2 PRIVATE
+target_link_libraries(pdbgen3 PRIVATE
 	LLVMBinaryFormat
 	LLVMDebugInfoCodeView
 	LLVMDebugInfoMSF
@@ -174,7 +174,7 @@ target_link_libraries(pdbgen2 PRIVATE
 
 get_directory_property(CMKR_VS_STARTUP_PROJECT DIRECTORY ${PROJECT_SOURCE_DIR} DEFINITION VS_STARTUP_PROJECT)
 if(NOT CMKR_VS_STARTUP_PROJECT)
-	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT pdbgen2)
+	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT pdbgen3)
 endif()
 
 target_link_directories(pdbgen2 PRIVATE ${LLVM_INSTALL_DIR}/lib)

@@ -8,7 +8,7 @@ using namespace llvm::pdb;
 using namespace llvm::codeview;
 
 static cl::opt<std::string>
-    mapFilePath("map-file",
+    omapFilePath("omap-file",
                 cl::desc("Map file produced by a CodeDefender product"),
                 cl::Required);
 
@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
       argc, argv,
       "CodeDefender PDB Generator\n- Made with love by CR3Swapper :)\n");
 
-  std::vector<Entry> entries = parseEntriesFromFile(mapFilePath);
+  std::vector<Entry> entries = parseEntriesFromFile(omapFilePath);
   llvm::BumpPtrAllocator alloc;
   llvm::pdb::PDBFileBuilder builder(alloc);
   ModuleInfo moduleInfo;

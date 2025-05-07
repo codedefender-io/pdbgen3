@@ -3,9 +3,11 @@
 
 #include <utils.h>
 
+#define INVALID_ADDRESS 0xFFFFFFFF
+
 llvm::Expected<std::uint32_t>
 sectionOffsetToRVA(std::uint32_t sectionNumber, std::uint32_t sectionOffset,
-    const std::vector<llvm::object::coff_section>& sections) {
+                   const std::vector<llvm::object::coff_section> &sections) {
   if (sectionNumber > static_cast<int>(sections.size())) {
     return llvm::make_error<llvm::StringError>("Invalid section number",
                                                llvm::inconvertibleErrorCode());
@@ -30,34 +32,31 @@ bool isAddressInRange(const std::vector<Entry> &entries,
 
 std::vector<Entry> parseEntriesFromFile(const std::string &filePath) {
   std::vector<Entry> entries;
-  std::ifstream file(filePath);
+  std::ifstream file(filePath, std::ios::binary | std::ios::ate);
   if (!file) {
-    std::cerr << "Error: Failed to open file." << std::endl;
+    std::cerr << "Error: Failed to open file.\n";
     return entries;
   }
 
-  std::string line;
-  std::getline(file, line); // Skip the header line
+  std::streamsize size = file.tellg();
+  file.seekg(0, std::ios::beg);
 
-  while (std::getline(file, line)) {
-    std::istringstream ss(line);
-    std::string rangeStartStr, rangeEndStr, originalStr;
-
-    if (std::getline(ss, rangeStartStr, ',') &&
-        std::getline(ss, rangeEndStr, ',') && std::getline(ss, originalStr)) {
-      Entry entry = {
-          static_cast<uint32_t>(std::stoul(rangeStartStr, nullptr, 16)),
-          static_cast<uint32_t>(std::stoul(rangeEndStr, nullptr, 16)),
-          static_cast<uint32_t>(std::stoul(originalStr, nullptr, 16))};
-      entries.push_back(entry);
-    }
+  if (size % sizeof(Entry) != 0) {
+    std::cerr << "Error: File size is not a multiple of Entry size ("
+              << sizeof(Entry) << " bytes).\n";
+    return entries;
   }
 
-  // Sort the entries by rangeStart to allow binary search
-  std::sort(entries.begin(), entries.end(), [](const Entry &a, const Entry &b) {
-    return a.rangeStart < b.rangeStart;
-  });
+  std::vector<uint8_t> buffer(size);
+  if (!file.read(reinterpret_cast<char *>(buffer.data()), size)) {
+    std::cerr << "Error: Failed to read file into buffer.\n";
+    return entries;
+  }
 
+  std::size_t count = size / sizeof(Entry);
+  const Entry *data = reinterpret_cast<const Entry *>(buffer.data());
+
+  entries.assign(data, data + count);
   return entries;
 }
 
