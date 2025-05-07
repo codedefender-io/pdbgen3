@@ -2,10 +2,10 @@ Generate a PDB file given the old PDB file and an address mapping file generated
 
 ## Example
 
-Here is an example on how you use `pdbgen2` to generate a PDB file for an obfuscated CodeDefender binary.
+Here is an example on how you use `pdbgen3` to generate a PDB file for an obfuscated CodeDefender binary.
 
 ```
-pdbgen2.exe --obf-pe=example/HelloWorld_mutated.exe --map-file=example/HelloWorld.map.cvs --orig-pdb=example/HelloWorld.pdb --out-pdb=example/output.pdb
+pdbgen3.exe --obf-pe=example/HelloWorld_mutated.exe --omap-file=example/HelloWorld.omap --orig-pdb=example/HelloWorld.pdb --out-pdb=example/output.pdb
 ```
 
 This will generate a new pdb `output.pdb` in the `example/` folder.
