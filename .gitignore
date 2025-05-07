@@ -1,0 +1,6 @@
+build*/
+cmake-build*/
+CMakerLists.txt
+CMakeLists.txt.user
+llvm-build/
+llvm-install/
