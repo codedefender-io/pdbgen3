@@ -177,5 +177,5 @@ if(NOT CMKR_VS_STARTUP_PROJECT)
 	set_property(DIRECTORY ${PROJECT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT pdbgen3)
 endif()
 
-target_link_directories(pdbgen2 PRIVATE ${LLVM_INSTALL_DIR}/lib)
-target_include_directories(pdbgen2 PRIVATE ${LLVM_INSTALL_DIR}/include)
+target_link_directories(pdbgen3 PRIVATE ${LLVM_INSTALL_DIR}/lib)
+target_include_directories(pdbgen3 PRIVATE ${LLVM_INSTALL_DIR}/include)

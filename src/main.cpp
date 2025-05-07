@@ -9,7 +9,7 @@ using namespace llvm::codeview;
 
 static cl::opt<std::string>
     omapFilePath("omap-file",
-                cl::desc("Map file produced by a CodeDefender product"),
+                cl::desc("OMap file produced by a CodeDefender product"),
                 cl::Required);
 
 static cl::opt<std::string>
