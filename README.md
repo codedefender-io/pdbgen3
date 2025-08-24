@@ -1,14 +1,14 @@
-Generate a PDB file given the old PDB file and an address mapping file generated from CodeDefender. Not every tool that parses PDB files supports [PDB OMAP](https://github.com/getsentry/pdb/issues/17) therefore partial reconstruction of the PDB is required to support all tools (`IDA`, `WinDbg`, `x64dbg`, `Visual Studios`).
+This tool is used to generate a new PDB file for a PE file obfuscated by CodeDefender.
 
 ## Example
 
 Here is an example on how you use `pdbgen3` to generate a PDB file for an obfuscated CodeDefender binary.
 
 ```
-pdbgen3.exe --obf-pe=example/HelloWorld.rewritten.exe --omap-file=example/HelloWorld.omap --orig-pdb=example/HelloWorld.pdb --out-pdb=example/output.pdb
+pdbgen3.exe --obf-pe=example/HelloWorld.obfuscated.exe --omap-file=example/HelloWorld.dbg --orig-pdb=example/HelloWorld.pdb --out-pdb=example/HelloWorld.obfuscated.pdb
 ```
 
-This will generate a new pdb `output.pdb` in the `example/` folder.
+This will generate a new pdb `HelloWorld.obfuscated.pdb` in the `example/` folder.
 
 ## Precompiled
 
@@ -26,7 +26,7 @@ cmake -B build -DLLVM_BUILD_TYPE=Debug
 
 Delete the `build/` folder if you wish to switch between `Release` and `Debug`, then re-run the above command.
 
-## OMap File Format
+## Debug File Format
 
 This is just a binary file that contains the following format:
 
