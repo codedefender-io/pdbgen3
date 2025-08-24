@@ -42,7 +42,7 @@ std::vector<Entry> parseEntriesFromFile(const std::string &filePath) {
   file.seekg(0, std::ios::beg);
 
   if (size % sizeof(Entry) != 0) {
-    std::cerr << "Error: File size is not a multiple of Entry size ("
+    std::cerr << "Error: File size is not a multiple of `Entry` size ("
               << sizeof(Entry) << " bytes).\n";
     return entries;
   }

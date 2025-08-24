@@ -8,8 +8,8 @@ using namespace llvm::pdb;
 using namespace llvm::codeview;
 
 static cl::opt<std::string>
-    omapFilePath("omap-file",
-                cl::desc("OMap file produced by a CodeDefender product"),
+    omapFilePath("debug-file",
+                cl::desc("DBG file produced by a CodeDefender product"),
                 cl::Required);
 
 static cl::opt<std::string>

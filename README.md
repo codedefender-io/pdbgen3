@@ -5,7 +5,7 @@ This tool is used to generate a new PDB file for a PE file obfuscated by CodeDef
 Here is an example on how you use `pdbgen3` to generate a PDB file for an obfuscated CodeDefender binary.
 
 ```
-pdbgen3.exe --obf-pe=example/HelloWorld.obfuscated.exe --omap-file=example/HelloWorld.dbg --orig-pdb=example/HelloWorld.pdb --out-pdb=example/HelloWorld.obfuscated.pdb
+pdbgen3.exe --obf-pe=example/HelloWorld.obfuscated.exe --debug-file=example/HelloWorld.dbg --orig-pdb=example/HelloWorld.pdb --out-pdb=example/HelloWorld.obfuscated.pdb
 ```
 
 This will generate a new pdb `HelloWorld.obfuscated.pdb` in the `example/` folder.
