@@ -40,4 +40,3 @@ The number of entries is equal to the size of omap file divided by `0xC`.
 
 - [PdbGen](https://github.com/gix/PdbGen)
 - [llvm-docs](https://llvm.org/docs/PDB/index.html)
-- https://www.youtube.com/watch?v=gxmXWXUvNr8
